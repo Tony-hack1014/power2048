@@ -639,6 +639,11 @@ function handleTouchStart(e) {
   touchStartY = touch.clientY;
 }
 
+function handleTouchMove(e) {
+  e.preventDefault(); // just block scrolling
+}
+
+
 function handleTouchEnd(e) {
   e.preventDefault();
   if (touchStartX === null || touchStartY === null) return;
@@ -653,53 +658,6 @@ function handleTouchEnd(e) {
     x = touchStartX;
     y = touchStartY;
   }
-
-  touchEndX = x;
-  touchEndY = y;
-
-  const dx = touchEndX - touchStartX;
-  const dy = touchEndY - touchStartY;
-
-  const absDx = Math.abs(dx);
-  const absDy = Math.abs(dy);
-
-  const SWIPE_THRESHOLD = 30; // pixels
-
-  if (absDx < SWIPE_THRESHOLD && absDy < SWIPE_THRESHOLD) {
-    // too small, ignore
-    touchStartX = touchStartY = touchEndX = touchEndY = null;
-    return;
-  }
-
-  if (absDx > absDy) {
-    // horizontal swipe
-    if (dx > 0) {
-      // swipe right
-      moveRight();
-    } else {
-      // swipe left
-      moveLeft();
-    }
-  } else {
-    // vertical swipe
-    if (dy > 0) {
-      // swipe down
-      moveDown();
-    } else {
-      // swipe up
-      moveUp();
-    }
-  }
-
-  // reset
-  touchStartX = touchStartY = touchEndX = touchEndY = null;
-}
-
-function handleTouchMove(e) {
-  e.preventDefault(); // just block scrolling
-}
-
-
 
   touchEndX = x;
   touchEndY = y;
@@ -787,8 +745,5 @@ gridElement.addEventListener("touchend", handleTouchEnd, { passive: false });
 
 
 
-
 // Start on load
 startGame();
-
-
