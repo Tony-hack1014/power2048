@@ -23,6 +23,8 @@ body {
   border-radius: 12px;
   background: rgba(250, 248, 239, 0.8);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 #grid {
@@ -276,6 +278,7 @@ body {
 .tile-merged {
   animation: tile-merge-pop 0.2s ease-out;
 }
+
 
 
 
