@@ -631,25 +631,39 @@ function setBase(newBase) {
 }
 
 function handleTouchStart(e) {
+  e.preventDefault();  // ⬅ stop mobile scrolling
   if (!e.touches || e.touches.length === 0) return;
+
   const touch = e.touches[0];
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
 }
 
 function handleTouchEnd(e) {
+  e.preventDefault();  // ⬅ stop mobile scrolling
   if (touchStartX === null || touchStartY === null) return;
 
-  // On touchend, use changedTouches if available
   let x, y;
+
   if (e.changedTouches && e.changedTouches.length > 0) {
     x = e.changedTouches[0].clientX;
     y = e.changedTouches[0].clientY;
   } else {
-    // fallback (rare)
     x = touchStartX;
     y = touchStartY;
   }
+
+  touchEndX = x;
+  touchEndY = y;
+
+  handleSwipe();  // (you already have this)
+}
+
+function handleTouchMove(e) {
+  e.preventDefault(); // just block scrolling
+}
+
+
 
   touchEndX = x;
   touchEndY = y;
@@ -731,9 +745,13 @@ baseButtons.forEach((btn) => {
 });
 
 // Attach touch listeners to the grid so swipes work on mobile
-gridElement.addEventListener("touchstart", handleTouchStart, { passive: true });
-gridElement.addEventListener("touchend", handleTouchEnd, { passive: true });
+gridElement.addEventListener("touchstart", handleTouchStart, { passive: false });
+gridElement.addEventListener("touchmove", handleTouchMove, { passive: false });
+gridElement.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+
 
 
 // Start on load
 startGame();
+
