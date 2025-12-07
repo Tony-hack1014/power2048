@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power 2048</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1 class="title">Power 2048</h1>
+
+  <div id="top-bar">
+    <div id="score-box">
+      <div class="score-label">SCORE</div>
+      <div id="score-value">0</div>
+    </div>
+
+    <div id="best-box">
+      <div class="score-label">BEST</div>
+      <div id="best-value">0</div>
+    </div>
+
+    <div id="time-box">
+      <div class="score-label">TIME</div>
+      <div id="time-value">∞</div>
+    </div>
+
+    <button id="restart-button">Restart</button>
+  </div>
+
+
+
+  <div id="base-selector">
+    <span>Base:</span>
+    <button class="base-btn" data-base="2">2</button>
+    <button class="base-btn active" data-base="3">3</button>
+    <button class="base-btn" data-base="4">4</button>
+    <button class="base-btn" data-base="5">5</button>
+  </div>
+
+  <div id="mode-selector">
+    <span>Mode:</span>
+    <button class="mode-btn active" data-mode="classic">Classic</button>
+    <button class="mode-btn" data-mode="30">30s</button>
+    <button class="mode-btn" data-mode="60">1 min</button>
+    <button class="mode-btn" data-mode="300">5 min</button>
+  </div>
+
+  <div id="game-container">
+    <div id="grid"></div>
+  </div>
+
+
+  <p id="status"></p>
+
+  <script src="game.js"></script>
+
+
+
+
+</body>
+
+
+
+
+</html>

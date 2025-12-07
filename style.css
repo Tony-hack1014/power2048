@@ -1,0 +1,285 @@
+body {
+  background: radial-gradient(circle at top, #faf8ef 0%, #eee4da 40%, #faf8ef 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-align: center;
+  padding-top: 40px;
+  color: #776e65;
+}
+
+
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  color: #776e65;
+}
+
+
+#game-container {
+  width: 360px;
+  margin: 10px auto 0 auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(250, 248, 239, 0.8);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+#grid {
+  width: 100%;
+  height: 360px;
+  background: #bbada0;
+  padding: 10px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.18);
+}
+
+
+.tile {
+  width: 80px;
+  height: 80px;
+  background: #cdc1b4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #776e65;
+
+  /* smooth transform & subtle depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: transform 0.12s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.tile:not(:empty):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+}
+
+
+
+
+#status {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #776e65;
+  min-height: 22px;
+  opacity: 0.9;
+}
+
+
+
+
+#top-bar {
+  width: 360px;
+  margin: 0 auto 15px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+#score-box,
+#best-box,
+#time-box {
+  background: #bbada0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+  color: #f9f6f2;
+  min-width: 80px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.score-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+#score-value,
+#best-value,
+#time-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#restart-button {
+  background: #8f7a66;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  color: #f9f6f2;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, filter 0.1s ease-out;
+}
+
+#restart-button:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
+}
+
+#restart-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+
+#base-selector,
+#mode-selector {
+  width: 360px;
+  margin: 0 auto 8px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #776e65;
+}
+
+.base-btn,
+.mode-btn {
+  background: #cdc1b4;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #776e65;
+  font-size: 13px;
+  transition: background-color 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.base-btn.active,
+.mode-btn.active {
+  background: #8f7a66;
+  color: #f9f6f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.base-btn:hover,
+.mode-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.base-btn:active,
+.mode-btn:active {
+  transform: translateY(1px);
+}
+
+
+
+
+
+/* Tile colors for powers of 3 */
+
+/* Colors by relative exponent level (1 = weak, 8 = strongest / winning tile) */
+
+.tile-exp-1 {
+  background: #eee4da; /* light beige */
+  color: #776e65;
+}
+
+.tile-exp-2 {
+  background: #ede0c8; /* slightly darker */
+  color: #776e65;
+}
+
+.tile-exp-3 {
+  background: #f2b179; /* gold */
+  color: #f9f6f2;
+}
+
+.tile-exp-4 {
+  background: #f59563; /* orange */
+  color: #f9f6f2;
+}
+
+.tile-exp-5 {
+  background: #f67c5f; /* reddish orange */
+  color: #f9f6f2;
+}
+
+.tile-exp-6 {
+  background: #d8a2ff; /* purple */
+  color: #f9f6f2;
+}
+
+.tile-exp-7 {
+  background: #9b59b6; /* dark purple */
+  color: #f9f6f2;
+}
+
+.tile-exp-8 {
+  background: #ff4b4b; /* FINAL shiny color */
+  color: #f9f6f2;
+}
+/* Extra colors for high powers (used by base 2 only) */
+
+.tile-exp-9 {
+  background: #e67e22; /* strong orange-brown */
+  color: #f9f6f2;
+}
+
+.tile-exp-10 {
+  background: #2980b9; /* deep blue */
+  color: #f9f6f2;
+}
+
+.tile-exp-11 {
+  background: #ff4b4b; /* shiny final red */
+  color: #f9f6f2;
+  box-shadow: 0 0 10px #ff4b4b, 0 0 20px #ff4b4b;
+}
+
+/* Day 11 animations */
+
+@keyframes tile-pop-in {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tile-merge-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tile-new {
+  animation: tile-pop-in 0.18s ease-out;
+}
+
+.tile-merged {
+  animation: tile-merge-pop 0.2s ease-out;
+}
+
+
+
+
+
+
+
