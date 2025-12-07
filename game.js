@@ -608,7 +608,7 @@ function triggerSlideAnimation(direction) {
   // Remove class after animation finishes (about 150ms)
   setTimeout(() => {
     gridElement.classList.remove(className);
-  }, 230);
+  }, 180);
 }
 
 
@@ -646,15 +646,15 @@ function handleTouchMove(e) {
 
 function handleTouchEnd(e) {
   e.preventDefault();
+
   if (touchStartX === null || touchStartY === null) return;
 
-  // On touchend, use changedTouches if available
+  // Use changedTouches if available
   let x, y;
   if (e.changedTouches && e.changedTouches.length > 0) {
     x = e.changedTouches[0].clientX;
     y = e.changedTouches[0].clientY;
   } else {
-    // fallback (rare)
     x = touchStartX;
     y = touchStartY;
   }
@@ -668,10 +668,10 @@ function handleTouchEnd(e) {
   const absDx = Math.abs(dx);
   const absDy = Math.abs(dy);
 
-  const SWIPE_THRESHOLD = 30; // pixels
+  const SWIPE_THRESHOLD = 30; // pixels so short taps don't trigger moves
 
   if (absDx < SWIPE_THRESHOLD && absDy < SWIPE_THRESHOLD) {
-    // too small, ignore
+    // too small of a movement → ignore
     touchStartX = touchStartY = touchEndX = touchEndY = null;
     return;
   }
@@ -679,24 +679,16 @@ function handleTouchEnd(e) {
   if (absDx > absDy) {
     // horizontal swipe
     if (dx > 0) {
-      // swipe right
       moveRight();
-      triggerSlideAnimation("right");
     } else {
-      // swipe left
       moveLeft();
-      triggerSlideAnimation("left");
     }
   } else {
     // vertical swipe
     if (dy > 0) {
-      // swipe down
       moveDown();
-      triggerSlideAnimation("down");
     } else {
-      // swipe up
       moveUp();
-      triggerSlideAnimation("up");
     }
   }
 
@@ -726,28 +718,6 @@ window.addEventListener("keydown", (event) => {
     moveDown();
   }
 });
-
-document.addEventListener("keydown", (e) => {
-  switch (e.key) {
-    case "ArrowLeft":
-      moveLeft();
-      triggerSlideAnimation("left");
-      break;
-    case "ArrowRight":
-      moveRight();
-      triggerSlideAnimation("right");
-      break;
-    case "ArrowUp":
-      moveUp();
-      triggerSlideAnimation("up");
-      break;
-    case "ArrowDown":
-      moveDown();
-      triggerSlideAnimation("down");
-      break;
-  }
-});
-
 
 restartButton.addEventListener("click", () => {
   startGame();
