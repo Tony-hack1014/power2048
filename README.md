@@ -1,6 +1,6 @@
 Power 2048 (Custom Base Version)
 
-Website: https://tony-hack1014.github.io/power2048/
+Website: https://tony-hack1014.github.io/poly-base-2048/
 
 Power 2048 is a custom twist on the classic 2048 puzzle game.  
 Instead of doubling numbers, each tile follows powers of a chosen base: **2, 3, 4, or 5**.
@@ -45,6 +45,7 @@ index.html  – main layout.
 style.css   – visual styling.  
 game.js     – grid rendering + future game logic.  
 README.md   – project notes.  
+
 
 
 
