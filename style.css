@@ -279,6 +279,45 @@ body {
   animation: tile-merge-pop 0.2s ease-out;
 }
 
+/* Slide animations (Day 12) */
+
+@keyframes slide-left {
+  0%   { transform: translateX(24px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  0%   { transform: translateX(-24px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide-up {
+  0%   { transform: translateY(24px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  0%   { transform: translateY(-24px); }
+  100% { transform: translateY(0); }
+}
+
+/* Apply the animations — slower than before */
+.slide-left .tile {
+  animation: slide-left 0.22s ease-out;
+}
+
+.slide-right .tile {
+  animation: slide-right 0.22s ease-out;
+}
+
+.slide-up .tile {
+  animation: slide-up 0.22s ease-out;
+}
+
+.slide-down .tile {
+  animation: slide-down 0.22s ease-out;
+}
+
 
 
 
