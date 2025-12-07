@@ -640,15 +640,16 @@ function handleTouchStart(e) {
 }
 
 function handleTouchEnd(e) {
-  e.preventDefault();  // ⬅ stop mobile scrolling
+  e.preventDefault();
   if (touchStartX === null || touchStartY === null) return;
 
+  // On touchend, use changedTouches if available
   let x, y;
-
   if (e.changedTouches && e.changedTouches.length > 0) {
     x = e.changedTouches[0].clientX;
     y = e.changedTouches[0].clientY;
   } else {
+    // fallback (rare)
     x = touchStartX;
     y = touchStartY;
   }
@@ -656,7 +657,42 @@ function handleTouchEnd(e) {
   touchEndX = x;
   touchEndY = y;
 
-  handleSwipe();  // (you already have this)
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+
+  const absDx = Math.abs(dx);
+  const absDy = Math.abs(dy);
+
+  const SWIPE_THRESHOLD = 30; // pixels
+
+  if (absDx < SWIPE_THRESHOLD && absDy < SWIPE_THRESHOLD) {
+    // too small, ignore
+    touchStartX = touchStartY = touchEndX = touchEndY = null;
+    return;
+  }
+
+  if (absDx > absDy) {
+    // horizontal swipe
+    if (dx > 0) {
+      // swipe right
+      moveRight();
+    } else {
+      // swipe left
+      moveLeft();
+    }
+  } else {
+    // vertical swipe
+    if (dy > 0) {
+      // swipe down
+      moveDown();
+    } else {
+      // swipe up
+      moveUp();
+    }
+  }
+
+  // reset
+  touchStartX = touchStartY = touchEndX = touchEndY = null;
 }
 
 function handleTouchMove(e) {
@@ -754,4 +790,5 @@ gridElement.addEventListener("touchend", handleTouchEnd, { passive: false });
 
 // Start on load
 startGame();
+
 
