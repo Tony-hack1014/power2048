@@ -646,15 +646,15 @@ function handleTouchMove(e) {
 
 function handleTouchEnd(e) {
   e.preventDefault();
+
   if (touchStartX === null || touchStartY === null) return;
 
-  // On touchend, use changedTouches if available
+  // Use changedTouches if available
   let x, y;
   if (e.changedTouches && e.changedTouches.length > 0) {
     x = e.changedTouches[0].clientX;
     y = e.changedTouches[0].clientY;
   } else {
-    // fallback (rare)
     x = touchStartX;
     y = touchStartY;
   }
@@ -668,10 +668,10 @@ function handleTouchEnd(e) {
   const absDx = Math.abs(dx);
   const absDy = Math.abs(dy);
 
-  const SWIPE_THRESHOLD = 30; // pixels
+  const SWIPE_THRESHOLD = 30; // pixels so short taps don't trigger moves
 
   if (absDx < SWIPE_THRESHOLD && absDy < SWIPE_THRESHOLD) {
-    // too small, ignore
+    // too small of a movement → ignore
     touchStartX = touchStartY = touchEndX = touchEndY = null;
     return;
   }
@@ -679,19 +679,15 @@ function handleTouchEnd(e) {
   if (absDx > absDy) {
     // horizontal swipe
     if (dx > 0) {
-      // swipe right
       moveRight();
     } else {
-      // swipe left
       moveLeft();
     }
   } else {
     // vertical swipe
     if (dy > 0) {
-      // swipe down
       moveDown();
     } else {
-      // swipe up
       moveUp();
     }
   }
@@ -699,7 +695,6 @@ function handleTouchEnd(e) {
   // reset
   touchStartX = touchStartY = touchEndX = touchEndY = null;
 }
-
 
 // Keyboard input for WASD + Arrow keys
 window.addEventListener("keydown", (event) => {
@@ -742,6 +737,7 @@ baseButtons.forEach((btn) => {
 gridElement.addEventListener("touchstart", handleTouchStart, { passive: false });
 gridElement.addEventListener("touchmove", handleTouchMove, { passive: false });
 gridElement.addEventListener("touchend", handleTouchEnd, { passive: false });
+
 
 
 
