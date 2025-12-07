@@ -40,11 +40,12 @@ The game becomes both a puzzle and a way to build number sense.
 
 ## File Structure
 
-File Structure
+File Structure:
 index.html  – main layout
 style.css   – visual styling
 game.js     – grid rendering + future game logic
 README.md   – project notes
+
 
 
 
