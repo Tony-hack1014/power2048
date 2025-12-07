@@ -14,10 +14,10 @@ Just like how many people instantly recognize **512** as a power of 2 after play
 ## Base Progression Targets
 
 The final tile for each base follows:
-2 => 2^10 (2048)
-3 => 3^8 (6561)
-4 => 4^8 (65536)
-5 => 5^7 (78125)
+-2 => 2^10 (2048)
+-3 => 3^8 (6561)
+-4 => 4^8 (65536)
+-5 => 5^7 (78125)
 
 By playing repeatedly, the exponents start to feel familiar —  
 you begin to “just know” that 243 = 3⁵ or 15625 = 5⁶.  
@@ -45,6 +45,7 @@ index.html  – main layout
 style.css   – visual styling
 game.js     – grid rendering + future game logic
 README.md   – project notes
+
 
 
 
